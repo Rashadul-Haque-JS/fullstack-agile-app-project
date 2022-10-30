@@ -1,7 +1,7 @@
 import * as bcrypt from 'bcryptjs';
 import { NextFunction } from 'express';
 import { model, Schema } from 'mongoose';
-import { configData } from '../../../config/envConfig';
+
 
 //declare user type
 export interface IBusiness {
@@ -43,7 +43,7 @@ BusinessSchema.pre<IBusiness>('save', function hashPassword(next) {
     return next();
   }
 
-  bcrypt.hash(this.password, configData.salt, (err, hashedPassword) => {
+  bcrypt.hash(this.password, Number(process.env.HASH_SALT), (err, hashedPassword) => {
     if (err) return next(err);
     this.password = hashedPassword;
     next();

@@ -1,7 +1,6 @@
 import { addUser, BusinessModel } from '@repo-hubs/smart-tasks-lib';
 import { Request, Response, NextFunction } from 'express';
 import * as jwt from 'jsonwebtoken';
-import { configData } from '@repo-hubs/smart-tasks-lib';
 
 export const createUser = async (
   req: Request,
@@ -12,7 +11,7 @@ export const createUser = async (
     const authHeader = req.headers['authorization'];
     const token = authHeader && authHeader.split(' ')[1];
 
-    const verify = jwt.verify(token, configData.jwt_secret);
+    const verify = jwt.verify(token, process.env.JWT_SECRET);
 
     if (!verify) {
       res.status(401).json({ message: 'Unauthorized' });
