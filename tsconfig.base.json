@@ -14,7 +14,10 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@repo-hubs/smart-tasks-lib": ["libs/smart-tasks-lib/src/index.ts"],
+      "@repo-hubs/smart-tasks-ui": ["libs/smart-tasks-ui/src/index.ts"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }

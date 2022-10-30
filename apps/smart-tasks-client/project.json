@@ -1,0 +1,94 @@
+{
+  "name": "smart-tasks-client",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/smart-tasks-client/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/webpack:webpack",
+      "outputs": [
+        "{options.outputPath}"
+      ],
+      "defaultConfiguration": "production",
+      "options": {
+        "compiler": "babel",
+        "outputPath": "dist/apps/smart-tasks-client",
+        "index": "apps/smart-tasks-client/src/index.html",
+        "baseHref": "/",
+        "main": "apps/smart-tasks-client/src/main.tsx",
+        "polyfills": "apps/smart-tasks-client/src/polyfills.ts",
+        "tsConfig": "apps/smart-tasks-client/tsconfig.app.json",
+        "assets": [
+          "apps/smart-tasks-client/src/favicon.ico",
+          "apps/smart-tasks-client/src/assets"
+        ],
+        "styles": [
+          "apps/smart-tasks-client/src/styles.scss"
+        ],
+        "scripts": [],
+        "webpackConfig": "@nrwl/react/plugins/webpack"
+      },
+      "configurations": {
+        "development": {
+          "extractLicenses": false,
+          "optimization": false,
+          "sourceMap": true,
+          "vendorChunk": true
+        },
+        "production": {
+          "fileReplacements": [
+            {
+              "replace": "apps/smart-tasks-client/src/environments/environment.ts",
+              "with": "apps/smart-tasks-client/src/environments/environment.prod.ts"
+            }
+          ],
+          "optimization": true,
+          "outputHashing": "all",
+          "sourceMap": false,
+          "namedChunks": false,
+          "extractLicenses": true,
+          "vendorChunk": false
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nrwl/webpack:dev-server",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "smart-tasks-client:build",
+        "hmr": true
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "smart-tasks-client:build:development"
+        },
+        "production": {
+          "buildTarget": "smart-tasks-client:build:production",
+          "hmr": false
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": [
+        "{options.outputFile}"
+      ],
+      "options": {
+        "lintFilePatterns": [
+          "apps/smart-tasks-client/**/*.{ts,tsx,js,jsx}"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": [
+        "{workspaceRoot}/coverage/{projectRoot}"
+      ],
+      "options": {
+        "jestConfig": "apps/smart-tasks-client/jest.config.ts",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}
