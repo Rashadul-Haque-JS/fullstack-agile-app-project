@@ -1,32 +1,25 @@
-import { Request, Response, NextFunction} from 'express';
+import { SmartError } from './errors';
+import { MongooseError } from 'mongoose';
+import { Request, Response, NextFunction } from 'express';
 
-export const handleErrors = (
-  e: any,
+const errorHandler = (
+  error: Error,
   req: Request,
   res: Response,
   next: NextFunction
-
 ) => {
-  if (e === '400') {
-    res.status(400).json({
-      message: 'Bad Request',
-    });
-  } else if (e === '401') {
-    res.status(401).json({
-      message: 'Unauthorized',
-    });
-  } else if (e === '403') {
-    res.status(403).json({
-      message: 'Forbidden',
-    });
-  } else if (e === '404') {
-    res.status(404).json({
-      message: 'Not Found',
-    });
+  if (error instanceof SmartError) {
+    res.status(error.errorCode!).json({ error_message: error.message, error_code:error.errorCode, success: false });
+  } else if (error instanceof MongooseError) {
+    res.status(400).json({ error_message: error.message, error_code:400, success: false});
+  } else if (error instanceof SyntaxError) {
+    res.status(400).json({ error: 'Invalid JSON' });
   } else {
+    console.error('find ',error);
     res.status(500).json({
-      errorCode: e.code,
-      message: e.message,
+      error_message: error.message,error_code:500, success: false
     });
   }
 };
+
+export { errorHandler };
