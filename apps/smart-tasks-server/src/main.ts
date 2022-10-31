@@ -2,7 +2,9 @@ import * as express from 'express';
 import * as path from 'path';
 import * as morgan from 'morgan';
 import * as cors from 'cors';
-// import routes from './app/routes';
+
+import * as routes from './app/routes';
+
 import { smartDB } from '@repo-hubs/smart-tasks-lib';
 import { handleErrors } from '@repo-hubs/smart-tasks-lib';
 const app = express();
@@ -16,7 +18,8 @@ app.use('/assets', express.static(path.join(__dirname, 'assets')));
 
 app.use(handleErrors);
 
-// app.use('', routes);
+app.use('', routes.business);
+app.use('', routes.users);
 
 app.use('/assets', express.static(path.join(__dirname, 'assets')));
 

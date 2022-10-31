@@ -18,7 +18,7 @@ export const createBusiness = async (
       await business.save();
 
       const token = jwt.sign({ id: business._id }, process.env.JWT_SECRET, {
-        expiresIn: process.env.JWT_EXPIRE,
+        expiresIn: 1000 * 60 * 60 * 24,
       });
 
       res.json({
@@ -31,6 +31,7 @@ export const createBusiness = async (
       throw new Error();
     }
   } catch (error) {
-    next(error);
+    console.log(error);
+    // next(error);
   }
 };

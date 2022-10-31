@@ -18,7 +18,6 @@ const UserSchema: Schema = new Schema<IUser>(
     name: {
       type: String,
       lowercase: true,
-      unique: true,
       required: [true, 'Nmae is required'],
       index: true,
     },

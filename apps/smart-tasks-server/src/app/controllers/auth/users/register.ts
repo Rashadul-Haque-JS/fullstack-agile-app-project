@@ -7,22 +7,32 @@ export const createUser = async (
   res: Response,
   next: NextFunction
 ) => {
+  interface UserPayload {
+    id: string;
+  }
+
   try {
     const authHeader = req.headers['authorization'];
-    const token = authHeader && authHeader.split(' ')[1];
+    const bearerToken = authHeader && authHeader.split(' ')[1];
 
-    const verify = jwt.verify(token, process.env.JWT_SECRET);
+    const verify = jwt.verify(bearerToken, process.env.JWT_SECRET) as UserPayload;
 
     if (!verify) {
       res.status(401).json({ message: 'Unauthorized' });
     }
 
-    // const businessId = await BusinessModel.findById({ _id: verify.id }).select(
-    //   '_id'
-    // );
+    const business = await BusinessModel.findById({ _id: verify.id });
 
-    const user = await addUser(req.body);
-    res.json({ message: 'user is created succesfully', success: true, user });
+    const userData = req.body;
+    userData['businessId'] = business._id;
+    
+    const user = await addUser(userData);
+
+    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
+      expiresIn: 1000 * 60 * 60 * 24,
+    });
+
+    res.json({ message: 'user is created succesfully', success: true, user, token });
   } catch (error) {
     next(error);
   }
