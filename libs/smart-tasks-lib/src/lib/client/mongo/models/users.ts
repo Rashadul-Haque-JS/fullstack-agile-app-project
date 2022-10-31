@@ -53,27 +53,15 @@ UserSchema.pre<IUser>('save', function hashPassword(next) {
     return next();
   }
 
-  bcrypt.hash(this.password,Number(process.env.HASH_SALT), (err, hashedPassword) => {
-    if (err) return next(err);
-    this.password = hashedPassword;
-    next();
-  });
-});
-
-UserSchema.methods.comparePassword = function (
-  password: string,
-  next: NextFunction
-) {
-  bcrypt.compare(password, this.password, (err, isMatched) => {
-    if (err) return next(err);
-    else {
-      if (!isMatched) {
-        return next('Wrong password');
-      } else {
-        return next(this);
-      }
+  bcrypt.hash(
+    this.password,
+    Number(process.env.HASH_SALT),
+    (err, hashedPassword) => {
+      if (err) return next(err);
+      this.password = hashedPassword;
+      next();
     }
-  });
-};
+  );
+});
 
 export const UserModel = model('User', UserSchema);

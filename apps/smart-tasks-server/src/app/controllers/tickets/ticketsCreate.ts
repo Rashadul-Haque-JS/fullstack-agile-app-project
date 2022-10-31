@@ -1,12 +1,12 @@
-import { addUser, BusinessModel } from '@repo-hubs/smart-tasks-lib';
+import {
+  addTickets,
+  BusinessModel,
+  UserModel,
+} from '@repo-hubs/smart-tasks-lib';
 import { Request, Response, NextFunction } from 'express';
 import * as jwt from 'jsonwebtoken';
 
-export const createUser = async (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
+export const createTicket = async (req: Request, res: Response) => {
   interface UserPayload {
     _id: string;
   }
@@ -14,28 +14,42 @@ export const createUser = async (
   try {
     const authHeader = req.headers['authorization'];
     const bearerToken = authHeader && authHeader.split(' ')[1];
-
     const verify = jwt.verify(
       bearerToken,
       process.env.JWT_SECRET
     ) as UserPayload;
 
-    console.log(verify);
     if (!verify) {
-      res.status(401).json({ message: 'Unauthorized' });
+      throw new Error('Unauthorized access');
     }
 
-    const business = await BusinessModel.findOne({ _id: verify._id }).exec();
+    const business = await BusinessModel.findOne({ _id: verify._id });
 
-    const userData = req.body;
-    userData.businessId = business._id;
+    if (!business) {
+      throw new Error('Creating Ticket is only allowed for business authority');
+    }
 
-    await addUser(userData);
+    const user = await UserModel.findById({ _id: req.body.assigneesId });
+
+    if (!user) {
+      throw new Error('Assignee is not founnd');
+    }
+
+    console.log(business);
+    
+    const ticketsData = req.body;
+    ticketsData.created_by = business.defualt_admin_name;
+    ticketsData.businessId = business._id;
+    ticketsData.assigneesName = user.name;
+
+    // Create ticket
+    await addTickets(ticketsData);
 
     res.json({
-      message: 'user is created succesfully',
+      message: 'Ticket is created succesfully',
       success: true,
     });
+
   } catch (error) {
     if (error.code === 11000) {
       res.status(409).json({

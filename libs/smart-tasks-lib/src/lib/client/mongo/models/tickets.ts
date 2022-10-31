@@ -5,6 +5,7 @@ export interface ITickets {
   title: string;
   shortDesc: string;
   desc: string;
+  businessId: string;
   created_by: string;
   assigneesId: string;
   assigneesName: string;
@@ -33,10 +34,15 @@ const TicketSchema: Schema = new Schema<ITickets>(
       index: true,
     },
 
+    businessId: {
+      type: String,
+      required: [true, 'business id is required'],
+    },
+
     created_by: {
       type: String,
       lowercase: true,
-      required: [true, 'Asignees id is required'],
+      required: [true, 'creators name is required'],
     },
 
     assigneesId: {
@@ -65,4 +71,4 @@ const TicketSchema: Schema = new Schema<ITickets>(
   { timestamps: true }
 );
 
-export const TicketModel =  model('Tickets', TicketSchema);
+export const TicketModel = model('Tickets', TicketSchema);

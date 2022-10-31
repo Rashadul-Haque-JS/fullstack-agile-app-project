@@ -6,7 +6,6 @@ import * as cors from 'cors';
 import * as routes from './app/routes';
 
 import { smartDB } from '@repo-hubs/smart-tasks-lib';
-import { errorHandler } from '@repo-hubs/smart-tasks-lib';
 const app = express();
 
 app.use(cors());
@@ -16,10 +15,10 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use('/assets', express.static(path.join(__dirname, 'assets')));
 
-app.use(errorHandler);
 
 app.use('', routes.business);
 app.use('', routes.users);
+app.use('', routes.tickets);
 
 app.use('/assets', express.static(path.join(__dirname, 'assets')));
 
