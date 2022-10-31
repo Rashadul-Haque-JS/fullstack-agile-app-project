@@ -23,7 +23,7 @@ app.use('', routes.tickets);
 app.use('/assets', express.static(path.join(__dirname, 'assets')));
 
 app.get('/api', (req, res) => {
-  res.send({ message: 'Welcome to agile-app-server!' });
+  res.send({ message: 'Hello, Welcome to Smart Task! I am from express. What i can display for you is JSON!!! :)' });
 });
 
 const port = process.env.port || 3333;
