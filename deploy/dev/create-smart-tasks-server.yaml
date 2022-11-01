@@ -1,0 +1,17 @@
+name: smart-cat
+region: ams
+services:
+- build_command: npx  nx run smart-tasks-server:build:production
+  environment_slug: node-js
+  github:
+    branch: main
+    deploy_on_push: true
+    repo: Rashadul-Haque-JS/repo-hub
+  http_port: 3333
+  instance_count: 1
+  instance_size_slug: basic-xxs
+  name: repo-hub
+  routes:
+  - path: /
+  run_command: node ./dist/apps/smart-tasks-server/main.js
+  source_dir: /
