@@ -1,4 +1,5 @@
 import { addUser, BusinessModel } from '@repo-hubs/smart-tasks-lib';
+import { Console } from 'console';
 import { Request, Response, NextFunction } from 'express';
 import * as jwt from 'jsonwebtoken';
 
@@ -27,15 +28,19 @@ export const createUser = async (
 
     const business = await BusinessModel.findOne({ _id: verify._id }).exec();
 
-    const userData = req.body;
-    userData.businessId = business._id;
+    if (!business) {
+      res.status(401).json({ message: 'Unauthorized' });
+    } else {
+      const userData = req.body;
+      userData.businessId = business._id;
 
-    await addUser(userData);
+      await addUser(userData);
 
-    res.json({
-      message: 'user is created succesfully',
-      success: true,
-    });
+      res.json({
+        message: 'user is created succesfully',
+        success: true,
+      });
+    }
   } catch (error) {
     if (error.code === 11000) {
       res.status(409).json({
