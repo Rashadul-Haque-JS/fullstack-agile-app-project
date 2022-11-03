@@ -1,1 +1,2 @@
-doctl apps create --spec ./dev/create-smart-tasks-server.yaml
+
+doctl apps create --spec ./dev/smart-tasks.yaml
