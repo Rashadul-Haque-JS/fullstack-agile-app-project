@@ -7,7 +7,9 @@
     "start:react": "nx serve smart-tasks-client",
     "start:express": "nx serve smart-tasks-server",
     "build": "nx build",
-    "test": "nx test"
+    "test": "nx test",
+    "test:api": "nx run smart-tasks-server:test",
+    "test:client": "nx run smart-tasks-client:test"
   },
   "private": true,
   "dependencies": {
