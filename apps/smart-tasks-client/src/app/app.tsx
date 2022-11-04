@@ -5,12 +5,11 @@ import '../styles.scss'
 import Login from "./login";
 
 
-
 export function App() {
 
   return (
     <>
-      <Login title="Smart Tasks"/>
+      <Login/>
       <div />
     
     {/* START: routes */}

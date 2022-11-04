@@ -2,7 +2,8 @@ import logo from '../assets/images/st-white.png';
 import React, { useState } from 'react';
 import { businessLogin, saveHeaderToken } from '../api/api';
 
-export function NxWelcome({ title }: { title: string }) {
+
+export function NxLogin() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -157,4 +158,4 @@ export function NxWelcome({ title }: { title: string }) {
   );
 }
 
-export default NxWelcome;
+export default NxLogin;
