@@ -2,15 +2,13 @@
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 
 import '../styles.scss'
+
 import Login from "./login";
-
-
 export function App() {
 
   return (
     <>
       <Login/>
-      <div />
     
     {/* START: routes */}
     {/* These routes and navigation have been generated for you */}
