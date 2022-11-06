@@ -4,6 +4,7 @@ import { businessLogin } from '../../api/api';
 import { saveHeaderToken } from '../../api/api';
 import { setCookies } from '@repo-hubs/smart-tasks-ui';
 
+
 const LoginComponent = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -17,7 +18,7 @@ const LoginComponent = () => {
       setCookies('BTIP', res.data.id);
       setCookies('BTTP', res.data.token);
       saveHeaderToken(res.data.token);
-      navigate(`/home/${res.data.id}`);
+      navigate('/home');
     } catch (error) {
       alert(error);
     }

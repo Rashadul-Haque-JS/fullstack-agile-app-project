@@ -13,7 +13,7 @@ import { businessById } from 'apps/smart-tasks-client/src/api/api';
 
 const Home = () => {
   const business = useSelector(
-    (state: RootState) => state.businessAuth.currentBusiness
+    (state: RootState) => state.business.currentBusiness
   );
 
   const dispatch = useDispatch();

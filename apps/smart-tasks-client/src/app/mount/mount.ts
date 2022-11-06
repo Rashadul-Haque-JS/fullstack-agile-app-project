@@ -9,10 +9,3 @@ export const getHeaders = async () => {
 }
 
 
-export const navigations = (navigate:any)=>{
-    if(token){
-        navigate('/home')
-    }else{
-        navigate('/')
-    }
-}

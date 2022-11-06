@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 import { businessLogout, removeHeaderToken } from '../../api/api';
 import { removeCookies } from '@repo-hubs/smart-tasks-ui';
 import { logOutBusiness } from '../features/business/businessAuthSlicer';
+import toast from "react-hot-toast";
 
 const Navbar = () => {
   const { pathname } = useLocation();
@@ -17,10 +18,10 @@ const Navbar = () => {
       const res = await businessLogout();
       removeHeaderToken();
       dispatch(logOutBusiness());
-      alert(res.data.message);
       navigate('/')
+      toast.success(res.data.message);
     } catch (error: any) {
-      alert(error.message);
+      toast.error(error.message);
     }
   };
 
