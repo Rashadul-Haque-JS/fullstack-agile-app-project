@@ -1,0 +1,9 @@
+import { BusinessModel } from "../../models";
+
+export const getBusinessById = async (businessId: string) => {
+    const authBusiness = await BusinessModel.findOne({
+        _id: businessId,
+      }).select('-password');
+
+      return businessId
+}

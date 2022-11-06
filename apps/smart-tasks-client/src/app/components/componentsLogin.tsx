@@ -1,24 +1,37 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { businessLogin } from '../../api/api';
 import { saveHeaderToken } from '../../api/api';
+import { useDispatch } from 'react-redux';
+import {
+  addBToken,
+  addCrntBusiness,
+} from '../features/business/businessAuthSlicer';
 
 const LoginComponent = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const handleLogin = async (event: any) => {
     event.preventDefault();
     try {
       const res = await businessLogin(email, password);
+      dispatch(addCrntBusiness(res.data.authBusiness));
+      dispatch(addBToken(res.data.token));
       saveHeaderToken(res.data.token);
-      console.log(res);
+      navigate('/home');
     } catch (error) {
       alert(error);
     }
   };
   return (
     <div className="text-container col-md-12">
-      <h1 className="text-center h-4 bg-primary text-dark p-2 rounded">Login</h1>
+      <h1 className="text-center h-4 bg-primary text-dark p-2 rounded">
+        Login
+      </h1>
       <div className="col-md-12 mt-3 rounded">
         <div className=" d-flex justify-content-center align-items-center mb-2">
           <div>
