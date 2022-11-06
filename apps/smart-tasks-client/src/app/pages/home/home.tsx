@@ -5,11 +5,29 @@ import './home.scss';
 import { RootState } from '../../store';
 import businessLogo from '../../../assets/images/lapis.png';
 import { Helmet } from 'react-helmet';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { getCookies } from '@repo-hubs/smart-tasks-ui';
+import { addCrntBusiness } from '../../features/business/businessAuthSlicer';
+import { businessById } from 'apps/smart-tasks-client/src/api/api';
 
 const Home = () => {
   const business = useSelector(
     (state: RootState) => state.businessAuth.currentBusiness
   );
+
+  const dispatch = useDispatch();
+  useEffect(() => {
+    const businessId = getCookies('BTIP');
+    const fetchBusiness = async () => {
+      if (businessId) {
+        const res = await businessById(businessId);
+        dispatch(addCrntBusiness(res.data.business));
+      }
+    };
+
+    fetchBusiness();
+  }, []);
   return (
     <div className="col-md-12 mt-4">
       <Helmet>
@@ -34,14 +52,21 @@ const Home = () => {
                 />
               </div>
               <div className="row justify-content-center justify-content-lg-start mt-4 ">
-                <h2 className='h5'>Address</h2>
-                <span className='text-sm '>{business.street}</span><span>{business.post}</span>
-                <span className='text-sm'>{business.city}</span><span>{business.country}</span>
+                <h2 className="h5">Address</h2>
+                <span className="text-sm ">{business.street}</span>
+                <span>{business.post}</span>
+                <span className="text-sm">{business.city}</span>
+                <span>{business.country}</span>
               </div>
               <div className="row justify-content-center justify-content-lg-start mt-3">
-                <h2 className='h5'>Contact</h2>
-                <span> <i className="fa fa-envelope"></i> {business.email}</span>
-                <span><i className="fa fa-phone"></i> 08 000 000 000</span>
+                <h2 className="h5">Contact</h2>
+                <span>
+                  {' '}
+                  <i className="fa fa-envelope"></i> {business.email}
+                </span>
+                <span>
+                  <i className="fa fa-phone"></i> 08 000 000 000
+                </span>
               </div>
             </div>
             <div className="col-md-8">

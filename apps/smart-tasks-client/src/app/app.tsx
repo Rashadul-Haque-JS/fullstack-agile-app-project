@@ -16,7 +16,7 @@ export function App() {
         <div className="container">
           <Routes>
             <Route path="/"  element={<Login />} />
-            <Route path="/home" element={<Home />} />
+            <Route path="/home/:businessId" element={<Home />} />
             <Route path="*" element={<PageNotFound />} />
           </Routes>
         </div>

@@ -2,27 +2,21 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { businessLogin } from '../../api/api';
 import { saveHeaderToken } from '../../api/api';
-import { useDispatch } from 'react-redux';
-import {
-  addBToken,
-  addCrntBusiness,
-} from '../features/business/businessAuthSlicer';
+import { setCookies } from '@repo-hubs/smart-tasks-ui';
 
 const LoginComponent = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const handleLogin = async (event: any) => {
     event.preventDefault();
     try {
       const res = await businessLogin(email, password);
-      dispatch(addCrntBusiness(res.data.authBusiness));
-      dispatch(addBToken(res.data.token));
+      setCookies('BTIP', res.data.id);
       saveHeaderToken(res.data.token);
-      navigate('/home');
+      navigate(`/home/${res.data.id}`);
     } catch (error) {
       alert(error);
     }

@@ -1,25 +1,29 @@
-// import { useEffect } from 'react'
+// import { useEffect } from 'react';
 // import { useDispatch } from 'react-redux';
-
+// import { getCookies } from '@repo-hubs/smart-tasks-ui';
+// import {
+//   addBToken,
+//   addCrntBusiness,
+// } from '../features/business/businessAuthSlicer';
+// import { getBusinessById } from '@repo-hubs/smart-tasks-lib';
 
 // const Mounts = () => {
-//   const dispatch = useDispatch()
+//   const dispatch = useDispatch();
 //   useEffect(() => {
+//     const businessId = getCookies('BTIP');
 //     const fetchBusiness = async () => {
-//     //   const response = await getAllSongs()
-//     //   dispatch(addAudio(response.data))
-//     //   const userRes = await getUsers()
-//     //   dispatch(addUsers(userRes.data))
-//     //   dispatch(addLogedUser(getLocalStorage('user')))
-//     //   dispatch(addToken(getLocalStorage('token')))
+//       if (businessId) {
+//         const res = await getBusinessById(businessId);
+//         dispatch(addCrntBusiness(res));
+//       }
+//     };
 
-//     // }
+//     fetchBusiness();
+//   }, [dispatch]);
 
-//     // fetchSong()
+//   return(
+//     <div></div>
+//   )
+// };
 
-// //   }, [dispatch])
-
-//   return
-// }
-
-// export default Mounts
+// export default Mounts;

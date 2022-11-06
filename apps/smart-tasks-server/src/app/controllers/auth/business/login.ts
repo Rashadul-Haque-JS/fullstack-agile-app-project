@@ -1,4 +1,4 @@
-import { BusinessModel } from '@repo-hubs/smart-tasks-lib';
+import { BusinessModel, addBAToken } from '@repo-hubs/smart-tasks-lib';
 import { Request, Response, NextFunction } from 'express';
 
 import * as jwt from 'jsonwebtoken';
@@ -23,10 +23,20 @@ export const businessLogin = async (req: Request, res: Response) => {
         _id: business._id,
       }).select('-password');
 
+      const accessData = {
+        name: authBusiness.name,
+        businessId: authBusiness._id,
+        token,
+        used_log: new Date(),
+      };
+
+      const tokenLog = await addBAToken(accessData);
+      await tokenLog.save();
+
       res.json({
         message: 'Login successfull',
         success: true,
-        authBusiness,
+        id: authBusiness._id,
         token,
       });
     }
