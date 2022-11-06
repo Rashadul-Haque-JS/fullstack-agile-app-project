@@ -19,7 +19,7 @@ const UserSchema: Schema = new Schema<IUser>(
       type: String,
       lowercase: true,
       required: [true, 'Nmae is required'],
-      index: true,
+      
     },
     password: {
       type: String,
@@ -32,7 +32,7 @@ const UserSchema: Schema = new Schema<IUser>(
       lowercase: true,
       required: [true, 'Email is required'],
       unique: true,
-      index: true,
+    
     },
     businessId: {
       type: String,

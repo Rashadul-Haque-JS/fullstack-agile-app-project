@@ -15,6 +15,7 @@ const LoginComponent = () => {
     try {
       const res = await businessLogin(email, password);
       setCookies('BTIP', res.data.id);
+      setCookies('BTTP', res.data.token);
       saveHeaderToken(res.data.token);
       navigate(`/home/${res.data.id}`);
     } catch (error) {

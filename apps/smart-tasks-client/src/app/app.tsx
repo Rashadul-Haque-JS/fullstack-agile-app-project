@@ -6,8 +6,16 @@ import { Toaster } from 'react-hot-toast';
 import Home from './pages/home/home';
 import PageNotFound from './pages/page404.tsx/page404';
 import Navbar from './components/navbar';
-
-export function App() {
+import { getCookies } from '@repo-hubs/smart-tasks-ui';
+import { saveHeaderToken } from '../api/api';
+import { useEffect } from 'react';
+const App = () => {
+  useEffect(() => {
+    const token = getCookies('BTTP');
+    if (token) {
+      saveHeaderToken(token);
+    }
+  }, []);
   return (
     <div className="App">
       <BrowserRouter>
@@ -15,7 +23,7 @@ export function App() {
 
         <div className="container">
           <Routes>
-            <Route path="/"  element={<Login />} />
+            <Route path="/" element={<Login />} />
             <Route path="/home/:businessId" element={<Home />} />
             <Route path="*" element={<PageNotFound />} />
           </Routes>
@@ -24,7 +32,7 @@ export function App() {
       <Toaster />
     </div>
   );
-}
+};
 
 export default App;
 // testing commit

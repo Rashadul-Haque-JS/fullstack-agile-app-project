@@ -22,7 +22,7 @@ const BusinessSchema: Schema = new Schema<IBusiness>(
       type: String,
       unique: true,
       required: [true, 'Business name is required'],
-      index: true,
+     
     },
     email: {
       type: String,
@@ -57,7 +57,7 @@ const BusinessSchema: Schema = new Schema<IBusiness>(
     admin: {
       type: String,
       default: 'Admin',
-      index: true,
+      
     },
   },
   { timestamps: true }

@@ -15,13 +15,10 @@ const BTokenSchema: Schema = new Schema<IBToken>(
     name: {
       type: String,
       required: [true, 'Business name is required'],
-      index: true,
     },
     businessId: {
       type: String,
-      lowercase: true,
       required: [true, 'Business id is required'],
-      index: true,
     },
     token: {
       type: String,

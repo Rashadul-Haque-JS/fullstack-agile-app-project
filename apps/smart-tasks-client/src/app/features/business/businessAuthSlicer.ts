@@ -1,15 +1,13 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 export interface busnessState {
-    currentBusiness: any,
-    photo: string,
-    token: string
-  }
+  currentBusiness: any;
+  photo: string;
+}
 
-const initialState :busnessState = {
+const initialState: busnessState = {
   currentBusiness: null,
   photo: '',
-  token: '',
 };
 
 export const businessAuthSlice = createSlice({
@@ -22,19 +20,13 @@ export const businessAuthSlice = createSlice({
     logOutBusiness: (state) => {
       state.currentBusiness = null;
     },
-    addBToken: (state, { payload }) => {
-      state.token = payload;
-    },
-    removeBToken: (state) => {
-      state.token = '';
-    },
+
     getPhoto: (state, { payload }) => {
       state.photo = payload;
     },
   },
 });
 
-export const { addCrntBusiness, logOutBusiness, addBToken, removeBToken } =
-  businessAuthSlice.actions;
+export const { addCrntBusiness, logOutBusiness } = businessAuthSlice.actions;
 
 export default businessAuthSlice.reducer;

@@ -1,17 +1,24 @@
 import SwipeableTemporaryDrawer from './drawer';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import { businessLogout, removeHeaderToken } from '../../api/api';
 import { removeCookies } from '@repo-hubs/smart-tasks-ui';
+import { logOutBusiness } from '../features/business/businessAuthSlicer';
 
 const Navbar = () => {
   const { pathname } = useLocation();
+  const dispatch = useDispatch();
+  
 
+  const navigate = useNavigate()
   const handleLogout = async () => {
+    removeCookies();
     try {
       const res = await businessLogout();
-      removeCookies();
       removeHeaderToken();
+      dispatch(logOutBusiness());
       alert(res.data.message);
+      navigate('/')
     } catch (error: any) {
       alert(error.message);
     }
