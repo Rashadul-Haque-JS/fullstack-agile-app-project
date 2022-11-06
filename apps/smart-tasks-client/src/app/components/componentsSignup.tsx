@@ -6,11 +6,16 @@ const SignupComponent = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [admin, setAdmin] = useState('');
+  const [street, setStreet] = useState('');
+  const [post, setPost] = useState('');
+  const [city, setCity] = useState('');
+  const [country, setCountry] = useState('');
 
   const handeleCreate = async (event: any) => {
     event.preventDefault();
     try {
-      const data = { name, email, password };
+      const data = { name, email, password,admin,street,post,city,country };
       const res = await businessCreate(data);
       saveHeaderToken(res.data.token);
       alert(res.data.message);
@@ -67,6 +72,62 @@ const SignupComponent = () => {
               required
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+            />
+          </fieldset>
+          <fieldset className="form-control form-group mt-2">
+            <input
+              className="w-100"
+              type="text"
+              name="admin"
+              placeholder="admin name (optional)"
+              required
+              value={admin}
+              onChange={(e) => setAdmin(e.target.value)}
+            />
+          </fieldset>
+          
+          <fieldset className="form-control form-group my-2 ">
+            <input
+              className="w-100"
+              type="text"
+              name="street"
+              placeholder="street & holding number"
+              required
+              value={street}
+              onChange={(e) => setStreet(e.target.value)}
+            />
+          </fieldset>
+          <fieldset className="form-control form-group my-2 ">
+            <input
+              className="w-100"
+              type="text"
+              name="post"
+              placeholder="post number"
+              required
+              value={post}
+              onChange={(e) => setPost(e.target.value)}
+            />
+          </fieldset>
+          <fieldset className="form-control form-group my-2 ">
+            <input
+              className="w-100"
+              type="text"
+              name="city"
+              placeholder="city"
+              required
+              value={city}
+              onChange={(e) => setCity(e.target.value)}
+            />
+          </fieldset>
+          <fieldset className="form-control form-group my-2 ">
+            <input
+              className="w-100"
+              type="text"
+              name="country"
+              placeholder="country"
+              required
+              value={country}
+              onChange={(e) => setCountry(e.target.value)}
             />
           </fieldset>
           <button className="btn btn-sm btn-dark text-light mt-2">Signup</button>

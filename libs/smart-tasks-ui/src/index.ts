@@ -1,1 +1,1 @@
-export * from './lib/smart-tasks-ui';
+export * from './lib/globalClientUIData';

@@ -1,17 +1,7 @@
 
-.card-container {
-  background-color: hsla(214, 62%, 21%, 1);
-  .card {
-    border-radius: 15px;
-    padding: 20px;
-    .card-header {
-      border-radius: 15px;
-    }
-    .customs-border {
-      box-shadow: 0px 0px 5px 0px rgba(151, 145, 145, 0.75);
-      border-radius: 15px;
-      padding: 10px;
-    
-    }
+.card-header-home {
+    background-color:#ffffff;
+    color: #000;
+    border: none;
+  
   }
-}

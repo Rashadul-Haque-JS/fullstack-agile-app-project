@@ -10,27 +10,27 @@ export interface ICard {
 
 const Card = (data: ICard) => {
   return (
-    <div className="card col-md-4 p-0">
-      <div className="mt-2">
+    <div className="card col-md-6 col-lg-6 p-0">
+      <div>
         <div className="card-header text-center">
           <h4>{data.title}</h4>
         </div>
-        <p className="m-3">{data.subTitle}</p>
+        <p className="m-3 text-center">{data.subTitle}</p>
         <div className="card-body mt-3" style={{ fontSize: '3.5rem' }}>
           <div className="text-center">
-            <i className={`fa ${data.icon}`}></i>
-            <span>{data.number}</span>
+            <i className={`fa ${data.icon} mx-2`} aria-hidden="true"></i>
+            <span className='mx-2'>{data.number}</span>
           </div>
           <div className='d-flex justify-content-center'>
           <div className="centered text-center mx-1  ">
-            <Link className="btn btn-md btn-dark text-light" to="#">
-            <i className='fa fa-list mx-2'></i>
+            <Link className="btn btn-sm btn-dark text-light" to="#">
+            <i className='fa fa-list mx-2' aria-hidden="true"></i>
               List
             </Link>
           </div>
           <div className="centered text-center mx-1">
-            <Link className="btn btn-md btn-dark text-light" to="#">
-            <i className='fa fa-plus mx-2'></i>
+            <Link className="btn btn-sm btn-dark text-light" to="#">
+            <i className='fa fa-plus mx-2' aria-hidden="true"></i>
               Create
             </Link>
           </div>

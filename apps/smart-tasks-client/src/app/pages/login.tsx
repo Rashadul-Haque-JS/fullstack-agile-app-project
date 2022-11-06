@@ -66,7 +66,7 @@ export function NxLogin() {
     }
     #hero {
       align-items: center;
-      background-color: hsla(214, 62%, 21%, 1);
+      background-color: #143157;
       border: none;
       box-sizing: border-box;
       color: rgba(55, 65, 81, 1);

@@ -13,7 +13,7 @@ export function App() {
       <BrowserRouter>
         <Navbar />
 
-        <div className="container mt-2">
+        <div className="container">
           <Routes>
             <Route path="/"  element={<Login />} />
             <Route path="/home" element={<Home />} />

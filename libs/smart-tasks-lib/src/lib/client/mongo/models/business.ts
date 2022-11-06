@@ -8,7 +8,11 @@ export interface IBusiness {
   name: string;
   password: string;
   email: string;
-  defualt_admin_name: string;
+  street: string;
+  post: string;
+  city: string;
+  country: string;
+  admin: string;
 }
 
 // define user schema
@@ -16,16 +20,9 @@ const BusinessSchema: Schema = new Schema<IBusiness>(
   {
     name: {
       type: String,
-      lowercase: true,
       unique: true,
-      required: [true, 'Nmae is required'],
+      required: [true, 'Business name is required'],
       index: true,
-    },
-    password: {
-      type: String,
-      required: true,
-      select: false,
-      minlength: [6, 'Minimum of 6 characters are required'],
     },
     email: {
       type: String,
@@ -34,8 +31,30 @@ const BusinessSchema: Schema = new Schema<IBusiness>(
       unique: true,
       index: true,
     },
+    password: {
+      type: String,
+      required: true,
+      select: false,
+      minlength: [6, 'Minimum of 6 characters are required'],
+    },
+    street: {
+      type: String,
+      required: [true, 'Street is required'],
+    },
 
-    defualt_admin_name: {
+    post: {
+      type: String,
+      required: [true, 'Post is required'],
+    },
+    city: {
+      type: String,
+      required: [true, 'City is required'],
+    },
+    country: {
+      type: String,
+      required: [true, 'Country is required'],
+    },
+    admin: {
       type: String,
       default: 'Admin',
       index: true,
@@ -59,7 +78,5 @@ BusinessSchema.pre<IBusiness>('save', function hashPassword(next) {
     }
   );
 });
-
-
 
 export const BusinessModel = model('Business', BusinessSchema);

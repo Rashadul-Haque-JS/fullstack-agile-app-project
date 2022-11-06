@@ -7,7 +7,7 @@ const Navbar = () => {
     return <div></div>;
   } else {
     return (
-      <div className="col-md-12 p-2 bg-dark">
+      <div className="col-md-12 p-2 navbar text-light">
         <div className="menu">
           <SwipeableTemporaryDrawer />
         </div>
