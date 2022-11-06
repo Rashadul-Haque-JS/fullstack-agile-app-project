@@ -1,29 +1,18 @@
-// import { useEffect } from 'react';
-// import { useDispatch } from 'react-redux';
-// import { getCookies } from '@repo-hubs/smart-tasks-ui';
-// import {
-//   addBToken,
-//   addCrntBusiness,
-// } from '../features/business/businessAuthSlicer';
-// import { getBusinessById } from '@repo-hubs/smart-tasks-lib';
+import { saveHeaderToken } from "../../api/api";
+import { getCookies } from "@repo-hubs/smart-tasks-ui";
+const token = getCookies('BTTP')
 
-// const Mounts = () => {
-//   const dispatch = useDispatch();
-//   useEffect(() => {
-//     const businessId = getCookies('BTIP');
-//     const fetchBusiness = async () => {
-//       if (businessId) {
-//         const res = await getBusinessById(businessId);
-//         dispatch(addCrntBusiness(res));
-//       }
-//     };
+export const getHeaders = async () => {
+    if(token){
+        return saveHeaderToken(token)
+    }
+}
 
-//     fetchBusiness();
-//   }, [dispatch]);
 
-//   return(
-//     <div></div>
-//   )
-// };
-
-// export default Mounts;
+export const navigations = (navigate:any)=>{
+    if(token){
+        navigate('/home')
+    }else{
+        navigate('/')
+    }
+}

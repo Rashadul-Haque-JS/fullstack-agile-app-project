@@ -1,20 +1,21 @@
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import '../styles.scss';
 import Login from './pages/login';
 import { Toaster } from 'react-hot-toast';
 import Home from './pages/home/home';
 import PageNotFound from './pages/page404.tsx/page404';
 import Navbar from './components/navbar';
-import { getCookies } from '@repo-hubs/smart-tasks-ui';
-import { saveHeaderToken } from '../api/api';
+// import { getCookies } from '@repo-hubs/smart-tasks-ui';
+// import { saveHeaderToken } from '../api/api';
 import { useEffect } from 'react';
+import { getHeaders} from './mount/mount';
 const App = () => {
+ 
   useEffect(() => {
-    const token = getCookies('BTTP');
-    if (token) {
-      saveHeaderToken(token);
-    }
+    getHeaders();
+   
   }, []);
   return (
     <div className="App">
