@@ -1,21 +1,17 @@
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
 import '../styles.scss';
 import Login from './pages/login';
 import { Toaster } from 'react-hot-toast';
 import Home from './pages/home/home';
 import PageNotFound from './pages/page404.tsx/page404';
 import Navbar from './components/navbar';
-// import { getCookies } from '@repo-hubs/smart-tasks-ui';
-// import { saveHeaderToken } from '../api/api';
+
 import { useEffect } from 'react';
-import { getHeaders} from './mount/mount';
+import { getHeaders } from './mount/mount';
 const App = () => {
- 
   useEffect(() => {
     getHeaders();
-   
   }, []);
   return (
     <div className="App">
@@ -25,12 +21,16 @@ const App = () => {
         <div className="container">
           <Routes>
             <Route path="/" element={<Login />} />
-            <Route path="/home/:businessId" element={<Home />} />
+            <Route path="/home" element={<Home />} />
             <Route path="*" element={<PageNotFound />} />
           </Routes>
         </div>
       </BrowserRouter>
-      <Toaster />
+      <Toaster
+        position="bottom-right"
+        reverseOrder={false}
+        toastOptions={{ duration: 5000 }}
+      />{' '}
     </div>
   );
 };
