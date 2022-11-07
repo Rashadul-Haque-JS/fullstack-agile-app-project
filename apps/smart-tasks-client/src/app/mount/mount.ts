@@ -8,8 +8,5 @@ export const getHeaders = async () => {
     }
 }
 
-// * Commit to merge test
-
-// export const RenderInCondtions = () =>{}
 
 

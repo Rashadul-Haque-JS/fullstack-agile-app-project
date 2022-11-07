@@ -1,5 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
-import businessSlice from './features/business/businessAuthSlicer';
+import businessSlice from '../features/business/businessAuthSlicer';
 export const store = configureStore({
   reducer: {
     business: businessSlice,

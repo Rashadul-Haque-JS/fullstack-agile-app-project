@@ -2,7 +2,7 @@ import { useSelector } from 'react-redux';
 import Card from '../../components/cardComponent';
 import { cardData } from '@repo-hubs/smart-tasks-ui';
 import './home.scss';
-import { RootState } from '../../store';
+import { RootState } from '../../store/store';
 import businessLogo from '../../../assets/images/lapis.png';
 import { Helmet } from 'react-helmet';
 import { useEffect } from 'react';
