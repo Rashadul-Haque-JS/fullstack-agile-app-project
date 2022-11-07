@@ -3,7 +3,7 @@ import { Link , useNavigate} from 'react-router-dom';
 import LoginComponent from '../components/componentsLogin';
 import SignupComponent from '../components/componentsSignup';
 import { Helmet } from 'react-helmet';
-import logo from '../../assets/images/st-white.png';
+import logo from '../../assets/images/st_blue.png';
 import { getCookies } from '@repo-hubs/smart-tasks-ui';
 
 export function NxLogin() {
@@ -87,7 +87,7 @@ export function NxLogin() {
     }
     #hero .text-container {
       color: rgba(255, 255, 255, 1);
-      padding: 3rem 1rem 0rem 1rem;
+      padding: 2rem 1rem 0rem 1rem;
     }
     
     
@@ -104,7 +104,7 @@ export function NxLogin() {
         </h1>
         <div className=" col-md-4">
           <div id="hero" className="rounded">
-            <div className="d-flex justify-content-center align-items-center col-md-12">
+            <div className="d-flex justify-content-center align-items-center col-md-12 mt-2">
               <img src={logo} alt="Site logo" />
             </div>
             {!isSignup && <LoginComponent />}
