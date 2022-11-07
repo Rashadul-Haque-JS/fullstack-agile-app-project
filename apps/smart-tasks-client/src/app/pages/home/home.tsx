@@ -9,7 +9,7 @@ import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { getCookies } from '@repo-hubs/smart-tasks-ui';
 import { addCrntBusiness } from '../../features/business/businessAuthSlicer';
-import { businessById } from 'apps/smart-tasks-client/src/api/api';
+import { businessById } from '../../../api/api';
 
 const Home = () => {
   const business = useSelector(

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link , useNavigate} from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import LoginComponent from '../components/componentsLogin';
 import SignupComponent from '../components/componentsSignup';
 import { Helmet } from 'react-helmet';
@@ -8,7 +8,7 @@ import { getCookies } from '@repo-hubs/smart-tasks-ui';
 
 export function NxLogin() {
   const [isSignup, setIsSignup] = useState<boolean>(false);
- 
+
   const navigate = useNavigate()
 
   useEffect(()=>{
