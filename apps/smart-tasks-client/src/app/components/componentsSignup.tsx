@@ -29,11 +29,11 @@ const SignupComponent = () => {
       <div className="col-md-12 mt-3 rounded">
         <div className=" d-flex justify-content-center align-items-center mb-2">
           <div>
-            <input type="radio" id="business" value="Admin" checked/>
+            <input type="radio" id="business" value="business"/>
             <label className="mx-1">Business</label>
           </div>
           <div>
-            <input className="mx-1" type="radio" id="business" value="Admin" disabled/>
+            <input className="mx-1" type="radio" id="user" value="user" disabled/>
             <label>User</label>
           </div>
         </div>

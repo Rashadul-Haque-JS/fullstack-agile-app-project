@@ -18,14 +18,14 @@ const Navbar = () => {
       const res = await businessLogout();
       removeHeaderToken();
       dispatch(logOutBusiness());
-      navigate('/')
+      // navigate('/')
       toast.success(res.data.message);
     } catch (error: any) {
       toast.error(error.message);
     }
   };
 
-  if (pathname === '/') {
+  if (pathname === '/login') {
     return <div></div>;
   } else {
     return (

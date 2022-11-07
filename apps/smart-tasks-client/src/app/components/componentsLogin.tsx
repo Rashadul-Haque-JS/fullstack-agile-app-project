@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import { businessLogin } from '../../api/api';
 import { saveHeaderToken } from '../../api/api';
 import { setCookies } from '@repo-hubs/smart-tasks-ui';
+import { loginBusiness } from '../features/business/businessAuthSlicer';
 
 
 const LoginComponent = () => {
@@ -10,6 +12,7 @@ const LoginComponent = () => {
   const [password, setPassword] = useState('');
 
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleLogin = async (event: any) => {
     event.preventDefault();
@@ -18,6 +21,7 @@ const LoginComponent = () => {
       setCookies('BTIP', res.data.id);
       setCookies('BTTP', res.data.token);
       saveHeaderToken(res.data.token);
+      dispatch(loginBusiness())
       navigate('/home');
     } catch (error) {
       alert(error);

@@ -3,25 +3,42 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import '../styles.scss';
 import Login from './pages/login';
 import { Toaster } from 'react-hot-toast';
-import Home from './pages/home/home';
+import { PrivateRoute } from './PrivateRoute';
 import PageNotFound from './pages/page404.tsx/page404';
 import Navbar from './components/navbar';
-
+import Home from './pages/home/home';
 import { useEffect } from 'react';
-import { getHeaders } from './mount/mount';
+import { useDispatch } from 'react-redux';
+import {
+  loginBusiness,
+  logOutBusiness,
+} from './features/business/businessAuthSlicer';
+import { saveHeaderToken } from '../api/api';
+import { getCookies } from '@repo-hubs/smart-tasks-ui';
+
 const App = () => {
+  const dispatch = useDispatch();
+  const token = getCookies('BTTP');
+
   useEffect(() => {
-    getHeaders();
-  }, []);
+    if (token) {
+      saveHeaderToken(token);
+      dispatch(loginBusiness());
+    } else {
+      dispatch(logOutBusiness());
+    }
+  }, [token]);
+
   return (
     <div className="App">
       <BrowserRouter>
         <Navbar />
-
         <div className="container">
           <Routes>
-            <Route path="/" element={<Login />} />
-            <Route path="/home" element={<Home />} />
+            <Route path="/" element={<PrivateRoute />}>
+              <Route path="/home" element={<Home />} />
+            </Route>
+            <Route path="/login" element={<Login />} />
             <Route path="*" element={<PageNotFound />} />
           </Routes>
         </div>

@@ -42,7 +42,13 @@ export const businessLogin = async (req: Request, res: Response) => {
     }
   } catch (error) {
     console.log(error);
-    if (error.code === undefined) {
+    if (error.code === 11000) {
+      res.status(409).json({
+        error_message: error.message,
+        success: false,
+        error_code: error.code,
+      });
+    } else if (error.code === undefined) {
       res.status(400).json({
         error_message: error.message,
         success: false,
