@@ -20,7 +20,7 @@ const DrawerNavigate = ({ variant, ...props }:any) => {
           open={open}
           onClose={() => setOpen(false)}
         >
-          <List>
+          <List className="h-100 bg-dark">
             <ListItem button onClick={() => setOpen(false)}>
               <ListItemText>
                 <Link style={{ textDecoration: "none" }} to="/home">
@@ -48,7 +48,7 @@ const DrawerNavigate = ({ variant, ...props }:any) => {
 
       <Grid item>
         <Button onClick={() => setOpen(!open)}>
-          {open ? 'menu' : 'menu'} 
+          {open ? <i className="fa fa-bars"></i> : <i className="fa fa-bars"></i>} 
         </Button>
       </Grid>
     </Grid>

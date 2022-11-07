@@ -33,9 +33,9 @@ const Navbar = () => {
         <div className="menu">
           <SwipeableTemporaryDrawer />
         </div>
-        <h1 className='h5 text-capitalize'>{pathname.split('/')[1]}</h1>
+        <h1 className='h6 text-capitalize'>{pathname.split('/')[1]}</h1>
         <div>
-          <button onClick={handleLogout}>Signout</button>
+          <button className='btn btn-sm bg-none text-primary' onClick={handleLogout}>Signout</button>
         </div>
       </div>
     );
