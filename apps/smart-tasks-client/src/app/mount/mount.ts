@@ -8,6 +8,5 @@ export const getHeaders = async () => {
     }
 }
 
-// * Commit to merge test
 
 
