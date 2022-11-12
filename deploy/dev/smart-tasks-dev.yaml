@@ -1,8 +1,27 @@
+databases:
+- cluster_name: rasha-db
+  engine: MONGODB
+  name: rasha-db
+  production: true
+  version: "5"
 name: smart-cat-dev
 region: ams
 services:
 - build_command: npx  nx run smart-tasks-server:build:production
   environment_slug: node-js
+  envs:
+  - key: JWT_SECRET
+    scope: RUN_AND_BUILD_TIME
+    value: i1225ydg
+  - key: HASH_SALT
+    scope: RUN_AND_BUILD_TIME
+    value: "12"
+  - key: DATABASE_URL
+    scope: RUN_TIME
+    value: ${rasha-db.DATABASE_URL}
+  - key: CA_CERT
+    scope: RUN_TIME
+    value: ${rasha-db.CA_CERT}
   github:
     branch: develop
     deploy_on_push: true
@@ -14,4 +33,16 @@ services:
   routes:
   - path: /api
   run_command: node ./dist/apps/smart-tasks-server/main.js
+  source_dir: /
+static_sites:
+- build_command: npx nx build smart-tasks-client
+  environment_slug: node-js
+  github:
+    branch: develop
+    deploy_on_push: true
+    repo: Rashadul-Haque-JS/repo-hub
+  name: smart-client
+  output_dir: dist/apps/smart-tasks-client
+  routes:
+  - path: /
   source_dir: /
