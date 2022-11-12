@@ -1,3 +1,9 @@
+databases:
+- cluster_name: rasha-db
+  engine: MONGODB
+  name: rasha-db
+  production: true
+  version: "5"
 name: smart-cat-dev
 region: ams
 services:
@@ -11,8 +17,11 @@ services:
     scope: RUN_AND_BUILD_TIME
     value: "12"
   - key: DATABASE_URL
-    scope: RUN_AND_BUILD_TIME
-    value: mongodb+srv://doadmin:937A4ulg2v86yfi1@rasha-db-d572be3c.mongo.ondigitalocean.com/admin?tls=true&authSource=admin&replicaSet=rasha-db
+    scope: RUN_TIME
+    value: ${rasha-db.DATABASE_URL}
+  - key: CA_CERT
+    scope: RUN_TIME
+    value: ${rasha-db.CA_CERT}
   github:
     branch: develop
     deploy_on_push: true
