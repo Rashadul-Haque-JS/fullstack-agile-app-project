@@ -3,6 +3,16 @@ region: ams
 services:
 - build_command: npx  nx run smart-tasks-server:build:production
   environment_slug: node-js
+  envs:
+  - key: DATABASE_URL
+    scope: RUN_AND_BUILD_TIME
+    value: mongodb+srv://doadmin:937A4ulg2v86yfi1@rasha-db-d572be3c.mongo.ondigitalocean.com/admin?tls=true&authSource=admin&replicaSet=rasha-db
+  - key: JWT_SECRET
+    scope: RUN_AND_BUILD_TIME
+    value: i1225ydg
+  - key: HASH_SALT
+    scope: RUN_AND_BUILD_TIME
+    value: "12"
   github:
     branch: main
     deploy_on_push: true
@@ -14,4 +24,17 @@ services:
   routes:
   - path: /api
   run_command: node ./dist/apps/smart-tasks-server/main.js
+  source_dir: /
+static_sites:
+- build_command: npx nx build smart-tasks-client
+  catchall_document: index.html
+  environment_slug: node-js
+  github:
+    branch: main
+    deploy_on_push: true
+    repo: Rashadul-Haque-JS/repo-hub
+  name: smart-clients
+  output_dir: dist/apps/smart-tasks-client
+  routes:
+  - path: /
   source_dir: /
