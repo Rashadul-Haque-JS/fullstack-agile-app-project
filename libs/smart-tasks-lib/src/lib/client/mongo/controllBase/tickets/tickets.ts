@@ -5,3 +5,4 @@ export const addTickets = async (ticket: ITickets) => {
   await newTicket.save();
   return newTicket;
 };
+

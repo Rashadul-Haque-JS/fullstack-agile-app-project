@@ -4,8 +4,9 @@ import { RootState } from './store/store';
 import { Navigate, Outlet } from 'react-router-dom';
 
 const PrivateRoute = () => {
-  const isLoged = useSelector((state: RootState) => state.business.isBLoged);
-  return isLoged ? <Outlet /> : <Navigate to="/login" />;
+  const isBLoged = useSelector((state: RootState) => state.business.isBLoged);
+  const isULogged = useSelector((state:RootState)=>state.user.isULoged)
+  return isBLoged || isULogged? <Outlet /> : <Navigate to="/login" />;
 };
 
 export { PrivateRoute };

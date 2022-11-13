@@ -1,13 +1,8 @@
+import { TicketModel } from '@repo-hubs/smart-tasks-lib';
+import { Request, Response, NextFunction } from 'express';
 import * as jwt from 'jsonwebtoken';
 
-import { BAccessTokenModel } from '@repo-hubs/smart-tasks-lib';
-import { Request, Response, NextFunction } from 'express';
-
-export const businessLogout = async (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
+export const ticketsByUser = async (req: Request, res: Response) => {
   interface UserPayload {
     _id: string;
   }
@@ -24,26 +19,17 @@ export const businessLogout = async (
       if (!verify) {
         res.status(401).json({ message: 'Unauthorized' });
       }
-
-      const admin = await BAccessTokenModel.findOne({
-        businessId: verify._id,
-      });
-
-      if (admin && admin.token === bearerToken) {
-        // Update token field for the current user while logging out
-        await admin.remove({ token: admin.token });
-
-        // await admin.update({ token: null, last_used_at: moment().format("YYYY-MM-DD HH:mm:ss") })
-        res.json({ message: 'Logged out successfull!', success: true });
+      const tickets = await TicketModel.find({
+        assigneesId: verify._id,
+      }).exec();
+      if (tickets.length > 0) {
+        res.json({ tickets });
       } else {
-        res.status(401).json({ message: 'Unauthorized' });
+        res.json({tickets:[]})
       }
-    } else {
-      res.status(400).json({ message: 'User not inlogged' });
     }
   } catch (error) {
     console.log(error);
-    
     if (error.code === 11000) {
       res.status(409).json({
         error_message: error.message,
@@ -65,5 +51,3 @@ export const businessLogout = async (
     }
   }
 };
-
-

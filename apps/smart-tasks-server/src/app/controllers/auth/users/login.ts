@@ -1,4 +1,4 @@
-import { UserModel } from '@repo-hubs/smart-tasks-lib';
+import { UserModel, IUToken, addUAToken } from '@repo-hubs/smart-tasks-lib';
 import { Request, Response, NextFunction } from 'express';
 
 import * as jwt from 'jsonwebtoken';
@@ -23,16 +23,27 @@ export const userLogin = async (req: Request, res: Response) => {
         _id: user._id,
       }).select('-password');
 
+      const accessData = {
+        name: authUser.name,
+        userId: authUser._id,
+        businessId: authUser.businessId,
+        token,
+        used_log: new Date(),
+      };
+
+      const tokenLog = await addUAToken(accessData);
+      await tokenLog.save();
+
       res.json({
         message: 'Login successfull',
         success: true,
-        authUser,
+        id:authUser._id,
         token,
       });
     }
   } catch (error) {
     console.log(error);
-     if (error.code === undefined) {
+    if (error.code === undefined) {
       res.status(400).json({
         error_message: error.message,
         success: false,

@@ -9,12 +9,14 @@ import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { getCookies } from '@repo-hubs/smart-tasks-ui';
 import { addCrntBusiness } from '../../features/business/businessAuthSlicer';
-import { businessById } from '../../../api/api';
+import { getTickets } from '../../features/tickets/ticketsSlicer';
+import { businessById, ticketsByBusinessId } from '../../../api/api';
 
 const Home = () => {
   const business = useSelector(
     (state: RootState) => state.business.currentBusiness
   );
+  const tickets = useSelector((state: RootState) => state.tickets.tickets);
 
   const dispatch = useDispatch();
   useEffect(() => {
@@ -23,11 +25,24 @@ const Home = () => {
       if (businessId) {
         const res = await businessById(businessId);
         dispatch(addCrntBusiness(res.data.business));
+      } else {
+        console.log('');
+      }
+    };
+
+    const fetchTickets = async () => {
+      if (businessId) {
+        const res = await ticketsByBusinessId();
+        dispatch(getTickets(res.data.tickets));
+      } else {
+        console.log('');
       }
     };
 
     fetchBusiness();
+    fetchTickets();
   }, []);
+
   return (
     <div className="col-md-12 mt-4">
       <Helmet>
@@ -81,7 +96,7 @@ const Home = () => {
                   title={cardData.tickets.title}
                   subTitle={cardData.tickets.subTitle}
                   icon={cardData.tickets.icon}
-                  number={cardData.tickets.number}
+                  number={tickets.length}
                 />
               </div>
             </div>

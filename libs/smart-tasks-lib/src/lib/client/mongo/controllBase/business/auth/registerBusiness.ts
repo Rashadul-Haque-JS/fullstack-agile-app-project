@@ -1,4 +1,4 @@
-import { BusinessModel, IBusiness } from '../../models';
+import { BusinessModel, IBusiness } from '../../../models';
 
 export const addBusiness = async (business: IBusiness) => {
   const newBusiness = new BusinessModel(business);

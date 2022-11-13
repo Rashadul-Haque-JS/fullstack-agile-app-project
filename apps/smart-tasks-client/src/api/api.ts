@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { StringExpressionOperatorReturningArray } from 'mongoose';
+
 
 export interface businessData {
   name: string;
@@ -31,4 +31,28 @@ export const businessCreate = async (data: businessData) => {
 
 export const businessById = async (businessId:string) => {
   return await axios.get(`/business/${businessId}`);
+};
+
+export const userLogin = async (email: string, password: string) => {
+  return await axios.post('/users/login', { email, password });
+};
+
+export const userLogout = async () => {
+  return await axios.get('/users/logout');
+};
+
+export const userCreate = async (data: businessData) => {
+  return await axios.post('/user', data);
+};
+
+export const userById = async (userId:string) => {
+  return await axios.get(`/users/${userId}`);
+};
+
+export const ticketsByBusinessId = async () => {
+  return await axios.get('/tickets/business');
+};
+
+export const ticketsByUserId = async () => {
+  return await axios.get('/tickets/user');
 };

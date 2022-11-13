@@ -1,25 +1,39 @@
 import SwipeableTemporaryDrawer from './drawer';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { businessLogout, removeHeaderToken } from '../../api/api';
+import { RootState } from '../store/store';
+import { useDispatch, useSelector } from 'react-redux';
+import { businessLogout,userLogout, removeHeaderToken } from '../../api/api';
 import { removeCookies } from '@repo-hubs/smart-tasks-ui';
 import { logOutBusiness } from '../features/business/businessAuthSlicer';
+import { logOutUser } from '../features/user/userAuthSlicer';
+import { removeTickets } from '../features/tickets/ticketsSlicer';
 import toast from "react-hot-toast";
 
 const Navbar = () => {
+  const isBLoged = useSelector((state: RootState) => state.business.isBLoged);
+
   const { pathname } = useLocation();
   const dispatch = useDispatch();
   
-
   const navigate = useNavigate()
   const handleLogout = async () => {
     removeCookies();
     try {
-      const res = await businessLogout();
+      if(isBLoged){
+        const res = await businessLogout();
       removeHeaderToken();
       dispatch(logOutBusiness());
+      dispatch(removeTickets())
       // navigate('/')
       toast.success(res.data.message);
+      }else{
+        const res = await userLogout();
+      removeHeaderToken();
+      dispatch(logOutUser());
+      dispatch(removeTickets())
+      // navigate('/')
+      toast.success(res.data.message);
+      }
     } catch (error: any) {
       toast.error(error.message);
     }

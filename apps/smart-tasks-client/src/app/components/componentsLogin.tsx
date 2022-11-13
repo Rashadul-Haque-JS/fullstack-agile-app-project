@@ -1,15 +1,16 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { businessLogin } from '../../api/api';
+import { businessLogin ,userLogin} from '../../api/api';
 import { saveHeaderToken } from '../../api/api';
 import { setCookies } from '@repo-hubs/smart-tasks-ui';
 import { loginBusiness } from '../features/business/businessAuthSlicer';
-
+import { loginUser } from '../features/user/userAuthSlicer';
 
 const LoginComponent = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [type, setType] = useState('business');
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -17,12 +18,21 @@ const LoginComponent = () => {
   const handleLogin = async (event: any) => {
     event.preventDefault();
     try {
-      const res = await businessLogin(email, password);
-      setCookies('BTIP', res.data.id);
-      setCookies('BTTP', res.data.token);
+      if (type === 'business') {
+        const res = await businessLogin(email, password);
+        setCookies('BTIP', res.data.id);
+        setCookies('BTTP', res.data.token);
+        saveHeaderToken(res.data.token);
+        dispatch(loginBusiness());
+        navigate('/home');
+      }else{
+        const res = await userLogin(email, password);
+      setCookies('UTIP', res.data.id);
+      setCookies('UTTP', res.data.token);
       saveHeaderToken(res.data.token);
-      dispatch(loginBusiness())
-      navigate('/home');
+      dispatch(loginUser())
+      navigate('/member');
+      }
     } catch (error) {
       alert(error);
     }
@@ -35,11 +45,24 @@ const LoginComponent = () => {
       <div className="col-md-12 mt-3 rounded">
         <div className=" d-flex justify-content-center align-items-center mb-2">
           <div>
-            <input type="radio" id="business" value="Admin" />
+            <input
+              type="radio"
+              id="business"
+              value="business"
+              checked={type === 'business'}
+              onChange={(e) => setType(e.target.value)}
+            />
             <label className="mx-1">Business</label>
           </div>
           <div>
-            <input className="mx-1" type="radio" id="business" value="Admin" />
+            <input
+              className="mx-1"
+              type="radio"
+              id="business"
+              value="member"
+              checked={type === 'member'}
+              onChange={(e) => setType(e.target.value)}
+            />
             <label>User</label>
           </div>
         </div>
