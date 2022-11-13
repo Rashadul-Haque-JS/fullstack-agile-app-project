@@ -1,6 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
-import businessSlice from '../features/business/businessAuthSlicer';
-import userSlicer from '../features/user/userAuthSlicer';
+import businessSlice from '../features/business/businessSlicer';
+import userSlicer from '../features/user/userSlicer';
 import ticketsSlicer from '../features/tickets/ticketsSlicer';
 
 export const store = configureStore({

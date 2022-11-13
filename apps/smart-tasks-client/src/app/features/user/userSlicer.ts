@@ -2,22 +2,27 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 export interface userState {
   currentUser: any;
+  businessName: string;
   photo: string;
   isULoged: boolean;
 }
 
 const initialState: userState = {
   currentUser: {},
+  businessName:'',
   photo: '',
   isULoged: false,
 };
 
 export const userAuthSlice = createSlice({
-  name: 'user-auth',
+  name: 'user',
   initialState,
   reducers: {
     addCrntUser: (state, { payload }) => {
       state.currentUser = payload;
+    },
+    addBname: (state, { payload }) => {
+      state.businessName = payload;
     },
     loginUser: (state) => {
       state.isULoged = true;
@@ -33,6 +38,6 @@ export const userAuthSlice = createSlice({
   },
 });
 
-export const { addCrntUser, logOutUser, loginUser } = userAuthSlice.actions;
+export const { addCrntUser,addBname, logOutUser, loginUser } = userAuthSlice.actions;
 
 export default userAuthSlice.reducer;

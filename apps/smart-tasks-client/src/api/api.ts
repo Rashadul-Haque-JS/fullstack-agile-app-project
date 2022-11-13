@@ -48,6 +48,9 @@ export const userCreate = async (data: businessData) => {
 export const userById = async (userId:string) => {
   return await axios.get(`/users/${userId}`);
 };
+export const businessByUser = async (businessId:string) => {
+  return await axios.get(`/users/business/${businessId}`);
+};
 
 export const ticketsByBusinessId = async () => {
   return await axios.get('/tickets/business');

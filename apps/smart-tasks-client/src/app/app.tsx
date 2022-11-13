@@ -13,7 +13,7 @@ import { useDispatch } from 'react-redux';
 import {
   loginBusiness,
   logOutBusiness,
-} from './features/business/businessAuthSlicer';
+} from './features/business/businessSlicer';
 import { saveHeaderToken } from '../api/api';
 import { getCookies } from '@repo-hubs/smart-tasks-ui';
 
