@@ -4,8 +4,8 @@ import { useDispatch } from 'react-redux';
 import { businessLogin ,userLogin} from '../../api/api';
 import { saveHeaderToken } from '../../api/api';
 import { setCookies } from '@repo-hubs/smart-tasks-ui';
-import { loginBusiness } from '../features/business/businessAuthSlicer';
-import { loginUser } from '../features/user/userAuthSlicer';
+import { loginBusiness } from '../features/business/businessSlicer';
+import { loginUser } from '../features/user/userSlicer';
 
 const LoginComponent = () => {
   const [email, setEmail] = useState('');

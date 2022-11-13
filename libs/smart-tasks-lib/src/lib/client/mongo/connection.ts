@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 
 export const smartDB = async () => {
-  console.log('DATABASE_URL', process.env.DATABASE_URl);
+  console.log('DATABASE_URL', process.env.DATABASE_URL);
   if (!process.env.DATABASE_URL) {
     console.log('undefined');
   } else {

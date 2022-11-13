@@ -8,7 +8,7 @@ import { Helmet } from 'react-helmet';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { getCookies } from '@repo-hubs/smart-tasks-ui';
-import { addCrntBusiness } from '../../features/business/businessAuthSlicer';
+import { addCrntBusiness } from '../../features/business/businessSlicer';
 import { getTickets } from '../../features/tickets/ticketsSlicer';
 import { businessById, ticketsByBusinessId } from '../../../api/api';
 
