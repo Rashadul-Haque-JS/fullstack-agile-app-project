@@ -36,9 +36,9 @@ export const createTicket = async (req: Request, res: Response) => {
     }
 
     console.log(business);
-    
+
     const ticketsData = req.body;
-    ticketsData.created_by = business.defualt_admin_name;
+    ticketsData.created_by = business.admin;
     ticketsData.businessId = business._id;
     ticketsData.assigneesName = user.name;
 
@@ -49,7 +49,6 @@ export const createTicket = async (req: Request, res: Response) => {
       message: 'Ticket is created succesfully',
       success: true,
     });
-
   } catch (error) {
     if (error.code === 11000) {
       res.status(409).json({

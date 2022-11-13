@@ -7,6 +7,7 @@ import {allBusiness } from '../controllers/business/business';
 import {businessLogout} from '../controllers/auth/business/logout'
 import {businessById} from '../controllers/business/businessById' 
 
+
 router.post('/business', createBusiness);
 router.post('/business/login', businessLogin);
 router.get('/business', allBusiness);

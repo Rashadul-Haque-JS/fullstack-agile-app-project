@@ -1,9 +1,9 @@
 import * as jwt from 'jsonwebtoken';
 
-import { BAccessTokenModel } from '@repo-hubs/smart-tasks-lib';
+import { UAccessTokenModel } from '@repo-hubs/smart-tasks-lib';
 import { Request, Response, NextFunction } from 'express';
 
-export const businessLogout = async (
+export const userLogout = async (
   req: Request,
   res: Response,
   next: NextFunction
@@ -25,15 +25,16 @@ export const businessLogout = async (
         res.status(401).json({ message: 'Unauthorized' });
       }
 
-      const admin = await BAccessTokenModel.findOne({
-        businessId: verify._id,
+      const user = await UAccessTokenModel.findOne({
+        userId: verify._id,
       });
 
-      if (admin && admin.token === bearerToken) {
+      if (user && user.token === bearerToken) {
         // Update token field for the current user while logging out
-        await admin.remove({ token: admin.token });
+        await user.remove({
+          token: user.token,
+        });
 
-        // await admin.update({ token: null, last_used_at: moment().format("YYYY-MM-DD HH:mm:ss") })
         res.json({ message: 'Logged out successfull!', success: true });
       } else {
         res.status(401).json({ message: 'Unauthorized' });
@@ -43,7 +44,7 @@ export const businessLogout = async (
     }
   } catch (error) {
     console.log(error);
-    
+
     if (error.code === 11000) {
       res.status(409).json({
         error_message: error.message,
@@ -65,5 +66,3 @@ export const businessLogout = async (
     }
   }
 };
-
-

@@ -1,4 +1,5 @@
 export * from './business/business'
 export * from './business/businessToken'
 export * from './user/users'
+export * from './user/userAccessToken'
 export * from './tickets'

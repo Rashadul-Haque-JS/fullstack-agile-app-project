@@ -7,6 +7,7 @@ import { PrivateRoute } from './PrivateRoute';
 import PageNotFound from './pages/page404.tsx/page404';
 import Navbar from './components/navbar';
 import Home from './pages/home/home';
+import Member from './pages/users/userProfile';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import {
@@ -37,6 +38,7 @@ const App = () => {
           <Routes>
             <Route path="/" element={<PrivateRoute />}>
               <Route path="/home" element={<Home />} />
+              <Route path="/member" element={<Member />} />
             </Route>
             <Route path="/login" element={<Login />} />
             <Route path="*" element={<PageNotFound />} />
