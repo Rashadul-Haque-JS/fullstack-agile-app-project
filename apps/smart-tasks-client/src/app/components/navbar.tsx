@@ -4,8 +4,8 @@ import { RootState } from '../store/store';
 import { useDispatch, useSelector } from 'react-redux';
 import { businessLogout,userLogout, removeHeaderToken } from '../../api/api';
 import { removeCookies } from '@repo-hubs/smart-tasks-ui';
-import { logOutBusiness } from '../features/business/businessAuthSlicer';
-import { logOutUser } from '../features/user/userAuthSlicer';
+import { logOutBusiness } from '../features/business/businessSlicer';
+import { logOutUser } from '../features/user/userSlicer';
 import { removeTickets } from '../features/tickets/ticketsSlicer';
 import toast from "react-hot-toast";
 
